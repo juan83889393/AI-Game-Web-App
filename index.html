@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors</title>
+
+  <!-- Fonts from Google Fonts (stand-ins for DESIGN.md's "Control" fonts) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Top bar -->
+  <header class="topbar">
+    <span class="topbar-name">Rock Paper Scissors</span>
+  </header>
+
+  <main class="page">
+    <!-- Title -->
+    <section class="intro">
+      <h1 class="title">Rock, paper, <em class="title-accent">shoot</em>.</h1>
+      <p class="subtitle">Show your hand to the camera. The computer picks its move at random, so it can't peek.</p>
+    </section>
+
+    <!-- Camera, countdown and Play button -->
+    <section class="stage">
+      <div class="camera">
+        <!-- The live webcam feed will play here (step 3) -->
+        <video id="webcam" class="camera-video" autoplay playsinline muted></video>
+        <p id="camera-placeholder" class="camera-placeholder" hidden>Your camera will appear here</p>
+
+        <!-- Countdown words show on top of the video (step 4). "Shoot!" is a sample. -->
+        <div id="countdown" class="countdown">
+          <span id="countdown-word" class="countdown-word">Shoot!</span>
+        </div>
+      </div>
+
+      <button id="play-button" class="button-ghost" type="button">Play</button>
+
+      <!-- Tips and "try again" messages appear here -->
+      <p id="message" class="message" role="status">Click Play, then hold up your hand when you see “Shoot!”</p>
+    </section>
+
+    <!-- Round result and score (sample numbers for now) -->
+    <section class="results">
+      <article id="result-card" class="card result">
+        <h2 id="verdict" class="result-verdict">You win this round</h2>
+
+        <div class="result-moves">
+          <div class="move">
+            <span class="move-label">You</span>
+            <span id="player-emoji" class="move-emoji" aria-hidden="true">✊</span>
+            <span id="player-move" class="move-name">Rock</span>
+          </div>
+
+          <span id="result-link" class="result-link">beats</span>
+
+          <div class="move">
+            <span class="move-label">Computer</span>
+            <span id="computer-emoji" class="move-emoji" aria-hidden="true">✌️</span>
+            <span id="computer-move" class="move-name">Scissors</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card score">
+        <h2 class="score-title">Score</h2>
+        <dl class="score-list">
+          <div class="score-item">
+            <dt>Wins</dt>
+            <dd id="score-wins">2</dd>
+          </div>
+          <div class="score-item">
+            <dt>Losses</dt>
+            <dd id="score-losses">1</dd>
+          </div>
+          <div class="score-item">
+            <dt>Ties</dt>
+            <dd id="score-ties">0</dd>
+          </div>
+        </dl>
+      </article>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
