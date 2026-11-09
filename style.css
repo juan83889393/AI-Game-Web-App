@@ -1,44 +1,47 @@
 /* =========================================================
-   Design tokens, copied from the Quick Start in DESIGN.md.
-   Use these variables everywhere instead of typing raw values.
+   Design tokens: a mix of two style guides
+   - FigureAI: white page, black type, technical uppercase
+     display font, gray labels, 1px gray rules
+   - CleanShot X: rounded dark "app window" screens, soft
+     card shadows, one blue action button
+   Use these variables everywhere instead of raw values.
    ========================================================= */
 :root {
   /* Colors */
-  --color-whiteout: #ffffff;
-  --color-haze: #f5f5f5;
-  --color-ink: #1b1b1b;
-  --color-black-void: #000000;
-  --color-twilight-blue: #426188;
-  --color-signal-blue: #2b7fff;
+  --color-lab-white: #ffffff;              /* FigureAI: page */
+  --color-figure-black: #0c0c0c;           /* FigureAI: main text */
+  --color-machine-gray: #6d6d6d;           /* FigureAI: labels, supporting text */
+  --color-calibration-gray: #cecece;       /* FigureAI: 1px rules */
+  --color-studio-black: #0f0f12;           /* CleanShot: dark screens */
+  --color-graphite: #161618;               /* CleanShot: chip text */
+  --color-electric-capture-blue: #0d44e8;  /* CleanShot: the Play button only */
+  --color-screen-line: rgba(255, 255, 255, 0.24); /* CleanShot: outline on dark */
 
-  /* Fonts: the "Control" fonts are paid fonts, so these point at
-     free Google Fonts stand-ins (see prd.md, DES-4) */
-  --font-control: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-control-compressed: 'Anton', 'Impact', ui-sans-serif, system-ui, sans-serif;
-  --font-control-cursive: 'Caveat', cursive;
-  --font-control-tnt: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Fonts */
+  --font-technical: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif; /* stands in for PP Neue Machina */
+  --font-text: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* Type scale */
-  --text-caption: 13px;
-  --leading-caption: 1.5;
+  --text-label: 14px;          /* uppercase technical labels */
+  --tracking-label: 0.28px;
   --text-body: 16px;
   --leading-body: 1.5;
-  --text-subheading: 20px;
-  --leading-subheading: 1.4;
-  --text-heading: 32px;
+  --text-body-large: 17px;
+  --leading-body-large: 1.6;
+  --text-heading: 22px;
   --leading-heading: 1.1;
-  --text-heading-lg: 56px;
-  --leading-heading-lg: 1;
-  --text-display: 259px;
-  --leading-display: 0.85;
+  --text-stat: 28px;           /* score numbers */
+  --text-timer: clamp(56px, 9vw, 104px);
+  --text-display: clamp(40px, 8vw, 96px);
+  --leading-display: 1;
+  --tracking-display: -0.01em;
 
   /* Weights */
   --font-weight-regular: 400;
   --font-weight-medium: 500;
-  --font-weight-black: 900;
+  --font-weight-semibold: 600;
 
   /* Spacing (4px base unit) */
-  --spacing-unit: 4px;
   --spacing-4: 4px;
   --spacing-8: 8px;
   --spacing-12: 12px;
@@ -46,36 +49,26 @@
   --spacing-20: 20px;
   --spacing-24: 24px;
   --spacing-32: 32px;
+  --spacing-40: 40px;
   --spacing-48: 48px;
-  --spacing-52: 52px;
-  --spacing-64: 64px;
   --spacing-80: 80px;
-  --spacing-120: 120px;
 
   /* Layout */
-  --page-max-width: 1150px;
-  --section-gap: 48px;
-  --card-padding: 20px;
-  --element-gap: 8px;
+  --page-max-width: 1080px;
+  --section-gap: 40px;
+  --card-padding: 24px;
+  --element-gap: 20px;
 
-  /* Border radius */
-  --radius-md: 4px;
-  --radius-lg: 8px;
-  --radius-lg-2: 11px;
-  --radius-xl: 14px;
-  --radius-cards: 12px;
-  --radius-pills: 9999px;
-  --radius-images: 11px;
-  --radius-inputs: 4px;
-  --radius-buttons: 8px;
+  /* Radius */
+  --radius-screens: 20px;   /* CleanShot media */
+  --radius-cards: 20px;     /* CleanShot cards */
+  --radius-buttons: 14px;   /* CleanShot buttons */
+  --radius-chips: 14px;     /* CleanShot badges */
 
-  /* Surfaces */
-  --surface-dark-canvas: #000000;
-  --surface-haze-card: #f5f5f5;
-  --surface-whiteout: #ffffff;
-
-  /* Game-specific: how wide the game column gets */
-  --game-width: 720px;
+  /* Shadows (CleanShot) */
+  --shadow-card: rgba(22, 22, 24, 0.02) 0px 7px 20px -8px, rgba(22, 22, 24, 0.02) 0px 29px 33px -4px, rgba(22, 22, 24, 0.05) 0px 22px 30px -8px, rgba(22, 22, 24, 0.06) 0px 0px 0px 1px;
+  --shadow-button: rgba(4, 24, 85, 0.28) 0px 2px 6px -1px, rgba(66, 174, 247, 0.48) 0px 6px 14px 0px inset;
+  --shadow-chip: rgba(22, 22, 24, 0.2) 0px 2px 6px -1px, rgba(22, 22, 24, 0.16) 0px 0px 0px 1px;
 }
 
 /* =========================================================
@@ -87,19 +80,18 @@
   box-sizing: border-box;
 }
 
-/* Anything with the "hidden" attribute stays hidden,
-   even if a class below gives it display: flex */
+/* Anything with the "hidden" attribute stays hidden */
 [hidden] {
   display: none !important;
 }
 
 body {
   margin: 0;
-  background: var(--surface-dark-canvas);
-  color: var(--color-whiteout);
-  font-family: var(--font-control);
+  background: var(--color-lab-white);
+  color: var(--color-figure-black);
+  font-family: var(--font-text);
   font-size: var(--text-body);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-regular);
   line-height: var(--leading-body);
   -webkit-font-smoothing: antialiased;
 }
@@ -107,167 +99,233 @@ body {
 h1,
 h2,
 p,
+figure,
 dl,
 dd {
   margin: 0;
 }
 
+/* Shared style for the uppercase "technical" labels */
+.wordmark,
+.chip,
+.timer-label,
+.computer-move,
+.card-title {
+  font-family: var(--font-technical);
+  font-size: var(--text-label);
+  font-weight: var(--font-weight-regular);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
 /* =========================================================
-   Top bar
+   Top bar: thin, with a 1px rule underneath
    ========================================================= */
 .topbar {
-  height: 72px;
-  max-width: var(--page-max-width);
-  margin: 0 auto;
-  padding: 0 var(--spacing-16);
+  height: 64px;
+  padding: 0 var(--spacing-24);
   display: flex;
   align-items: center;
-}
-
-.topbar-name {
-  font-size: var(--text-body);
-  font-weight: var(--font-weight-medium);
+  border-bottom: 1px solid var(--color-calibration-gray);
 }
 
 /* =========================================================
-   Page layout: one centered column with 48px between sections
+   Page layout
    ========================================================= */
 .page {
-  max-width: calc(var(--game-width) + 2 * var(--spacing-16));
+  max-width: calc(var(--page-max-width) + 2 * var(--spacing-24));
   margin: 0 auto;
-  padding: var(--spacing-32) var(--spacing-16) var(--spacing-80);
+  padding: var(--spacing-48) var(--spacing-24) var(--spacing-80);
   display: flex;
   flex-direction: column;
   gap: var(--section-gap);
 }
 
 /* =========================================================
-   Title: upright Inter with one handwritten Caveat word
+   Title
    ========================================================= */
 .intro {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-16);
-}
-
-.title {
-  font-family: var(--font-control-tnt);
-  font-size: clamp(40px, 9vw, var(--text-heading-lg));
-  font-weight: var(--font-weight-medium);
-  line-height: var(--leading-heading-lg);
-  letter-spacing: -0.02em;
-}
-
-.title-accent {
-  font-family: var(--font-control-cursive);
-  font-style: normal; /* Caveat is already handwritten, so no fake slant */
-  font-weight: var(--font-weight-medium);
-  font-size: 1.25em;  /* Caveat runs small, so it's scaled up to match */
-  letter-spacing: 0;
-}
-
-.subtitle {
-  font-size: var(--text-subheading);
-  line-height: var(--leading-subheading);
-  font-weight: var(--font-weight-regular);
-  max-width: 34em;
-  margin: 0 auto;
-}
-
-/* =========================================================
-   Camera card, countdown, Play button
-   ========================================================= */
-.stage {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-24);
+  gap: var(--spacing-16);
+  text-align: center;
 }
 
-.camera {
+.title {
+  font-family: var(--font-technical);
+  font-size: var(--text-display);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+}
+
+.lede {
+  max-width: 36em;
+  font-size: var(--text-body-large);
+  line-height: var(--leading-body-large);
+  color: var(--color-machine-gray);
+}
+
+/* =========================================================
+   Arena: [your camera] [timer] [computer]
+   ========================================================= */
+.arena {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas: "player timer computer";
+  align-items: center;
+  gap: var(--element-gap);
+}
+
+.screen-player { grid-area: player; }
+.timer { grid-area: timer; }
+.screen-computer { grid-area: computer; }
+
+/* A dark, rounded "app window" */
+.screen {
   position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  border-radius: var(--radius-images);
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-screens);
   overflow: hidden;
-  background: var(--color-ink);
-  container-type: inline-size; /* lets the countdown size itself to this box */
+  background: var(--color-studio-black);
+  color: var(--color-lab-white);
+  container-type: inline-size; /* lets the emoji size itself to the screen */
 }
 
-.camera-video {
+.screen-video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scaleX(-1); /* mirror, so it feels like a mirror (CAM-3) */
+  transform: scaleX(-1); /* mirror, so it feels like a mirror */
 }
 
-.camera-placeholder {
+.screen-message {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-24);
+  padding: var(--spacing-48) var(--spacing-24) var(--spacing-24);
   text-align: center;
-  color: var(--color-whiteout);
 }
 
-/* The countdown sits on a see-through black layer so the words stay
-   readable on a bright video, without shadows or gradients */
-.countdown {
+/* Labels along the top of each screen */
+.screen-bar {
+  position: absolute;
+  top: var(--spacing-12);
+  left: var(--spacing-12);
+  right: var(--spacing-12);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-8);
+}
+
+.chip {
+  padding: var(--spacing-8) var(--spacing-12);
+  border-radius: var(--radius-chips);
+  background: var(--color-lab-white);
+  color: var(--color-graphite);
+  box-shadow: var(--shadow-chip);
+  white-space: nowrap;
+}
+
+/* Status chip: see-through with a thin white outline */
+.chip-outline {
+  background: rgba(15, 15, 18, 0.6);
+  color: var(--color-lab-white);
+  box-shadow: none;
+  border: 1px solid var(--color-screen-line);
+}
+
+/* The computer's move, centered on its screen */
+.computer-pick {
   position: absolute;
   inset: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.4);
+  gap: var(--spacing-16);
+  padding-top: var(--spacing-32);
 }
 
-.countdown-word {
-  font-family: var(--font-control-compressed);
-  font-weight: 400; /* Anton only has one weight, and it's already heavy (DES-5) */
-  font-size: clamp(56px, 24cqi, 200px);
-  line-height: var(--leading-display);
-  text-transform: uppercase;
-  color: var(--color-whiteout);
+.computer-emoji {
+  font-family: var(--font-technical);
+  font-size: 40cqi;
+  line-height: 1;
 }
 
-/* Ghost button: see-through, white border, white text */
-.button-ghost {
-  font-family: var(--font-control);
+.computer-move {
+  font-size: clamp(14px, 6cqi, 22px);
+}
+
+/* The timer: the big technical number between the screens */
+.timer {
+  min-width: 3ch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.timer-value {
+  font-family: var(--font-technical);
+  font-size: var(--text-timer);
+  font-weight: var(--font-weight-regular);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  min-width: 2ch;
+  text-align: center;
+}
+
+.timer-label {
+  color: var(--color-machine-gray);
+}
+
+/* =========================================================
+   Play button and message
+   ========================================================= */
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-16);
+}
+
+/* CleanShot's blue button: the only color on the page */
+.button-primary {
+  font-family: var(--font-text);
   font-size: var(--text-body);
   font-weight: var(--font-weight-medium);
   line-height: var(--leading-body);
-  color: var(--color-whiteout);
-  background: transparent;
-  border: 1px solid var(--color-whiteout);
+  color: var(--color-lab-white);
+  background: var(--color-electric-capture-blue);
+  border: 1px solid var(--color-lab-white);
   border-radius: var(--radius-buttons);
+  box-shadow: var(--shadow-button);
   padding: var(--spacing-12) var(--spacing-48);
   cursor: pointer;
 }
 
-.button-ghost:hover {
-  background: rgba(255, 255, 255, 0.1);
+.button-primary:focus-visible {
+  outline: 2px solid var(--color-electric-capture-blue);
+  outline-offset: 3px;
 }
 
-.button-ghost:focus-visible {
-  outline: 2px solid var(--color-whiteout);
-  outline-offset: 4px;
-}
-
-.button-ghost:disabled {
-  opacity: 0.4;
+.button-primary:disabled {
+  opacity: 0.45;
   cursor: not-allowed;
-  background: transparent;
 }
 
 .message {
   min-height: 1.5em; /* keeps the layout steady when the text changes */
   text-align: center;
-  color: var(--color-whiteout);
+  color: var(--color-machine-gray);
 }
 
 /* =========================================================
@@ -276,107 +334,88 @@ dd {
 .results {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: var(--spacing-24);
+  gap: var(--element-gap);
 }
 
 .card {
-  background: var(--surface-haze-card);
-  color: var(--color-ink);
+  background: var(--color-lab-white);
   border-radius: var(--radius-cards);
+  box-shadow: var(--shadow-card);
   padding: var(--card-padding);
-}
-
-.result {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-20);
 }
 
+.card-title {
+  color: var(--color-machine-gray);
+}
+
 .result-verdict {
   font-size: var(--text-heading);
   line-height: var(--leading-heading);
-  font-weight: var(--font-weight-medium);
   letter-spacing: -0.01em;
 }
 
-.result-moves {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-12);
-}
-
-.move {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-4);
-  min-width: 0;
-}
-
-.move-label,
-.result-link {
-  font-weight: var(--font-weight-regular);
-}
-
-.move-emoji {
-  font-size: 48px;
-  line-height: 1.1;
-}
-
-.move-name {
-  font-size: var(--text-subheading);
-  line-height: var(--leading-subheading);
-}
-
-.score {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-16);
-}
-
-.score-title {
-  font-size: var(--text-subheading);
-  line-height: var(--leading-subheading);
-  font-weight: var(--font-weight-medium);
-}
-
-.score-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-8);
-}
-
-.score-item {
+/* Score as a FigureAI-style spec list with 1px rules */
+.spec-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  padding: var(--spacing-8) 0;
+  border-top: 1px solid var(--color-calibration-gray);
 }
 
-.score-item dt {
-  font-weight: var(--font-weight-regular);
+.spec-row dt {
+  color: var(--color-machine-gray);
 }
 
-.score-item dd {
-  font-size: var(--text-subheading);
+.spec-row dd {
+  font-family: var(--font-technical);
+  font-size: var(--text-stat);
+  line-height: 1.11;
   font-variant-numeric: tabular-nums;
 }
 
 /* =========================================================
-   Phones: stack the result and score cards
+   Phones: timer on top, the two screens side by side below
    ========================================================= */
-@media (max-width: 600px) {
+@media (max-width: 720px) {
+  .page {
+    padding-left: var(--spacing-16);
+    padding-right: var(--spacing-16);
+  }
+
+  .arena {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "timer timer"
+      "player computer";
+    gap: var(--spacing-12);
+  }
+
+  .screen {
+    aspect-ratio: 3 / 4;
+    border-radius: var(--radius-chips);
+  }
+
+  .screen-bar {
+    top: var(--spacing-8);
+    left: var(--spacing-8);
+    right: var(--spacing-8);
+  }
+
+  .chip {
+    padding: 6px var(--spacing-8);
+    font-size: 12px;
+  }
+
+  .screen-message {
+    font-size: 14px;
+    padding: var(--spacing-40) var(--spacing-12) var(--spacing-12);
+  }
+
   .results {
     grid-template-columns: 1fr;
-  }
-
-  .score-list {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .score-item {
-    flex-direction: column;
-    align-items: center;
   }
 }

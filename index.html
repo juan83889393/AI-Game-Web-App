@@ -5,79 +5,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rock Paper Scissors</title>
 
-  <!-- Fonts from Google Fonts (stand-ins for DESIGN.md's "Control" fonts) -->
+  <!-- Fonts: Space Grotesk stands in for FigureAI's "Neue Machina",
+       Inter stands in for the body fonts in both design files -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Top bar -->
   <header class="topbar">
-    <span class="topbar-name">Rock Paper Scissors</span>
+    <span class="wordmark">Rock Paper Scissors</span>
   </header>
 
   <main class="page">
     <!-- Title -->
     <section class="intro">
-      <h1 class="title">Rock, paper, <em class="title-accent">shoot</em>.</h1>
-      <p class="subtitle">Show your hand to the camera. The computer picks its move at random, so it can't peek.</p>
+      <h1 class="title">You vs. the machine</h1>
+      <p class="lede">Hold up rock, paper or scissors. When the timer hits zero, your camera takes a photo and the computer locks in its move.</p>
     </section>
 
-    <!-- Camera, countdown and Play button -->
-    <section class="stage">
-      <div class="camera">
-        <!-- The live webcam feed will play here (step 3) -->
-        <video id="webcam" class="camera-video" autoplay playsinline muted></video>
-        <p id="camera-placeholder" class="camera-placeholder" hidden>Your camera will appear here</p>
+    <!-- The two screens with the timer between them -->
+    <section class="arena" aria-label="Game screens">
+      <!-- Left: your camera -->
+      <figure class="screen screen-player">
+        <video id="webcam" class="screen-video" autoplay playsinline muted></video>
+        <p id="camera-message" class="screen-message">Starting your camera…</p>
+        <figcaption class="screen-bar">
+          <span class="chip">You</span>
+          <span id="camera-status" class="chip chip-outline">Off</span>
+        </figcaption>
+      </figure>
 
-        <!-- Countdown words show on top of the video (step 4). "Shoot!" is a sample. -->
-        <div id="countdown" class="countdown">
-          <span id="countdown-word" class="countdown-word">Shoot!</span>
-        </div>
+      <!-- Middle: the 10-second timer -->
+      <div class="timer">
+        <span id="timer-value" class="timer-value">10</span>
+        <span id="timer-label" class="timer-label">Seconds</span>
       </div>
 
-      <button id="play-button" class="button-ghost" type="button">Play</button>
-
-      <!-- Tips and "try again" messages appear here -->
-      <p id="message" class="message" role="status">Click Play, then hold up your hand when you see “Shoot!”</p>
+      <!-- Right: the computer's pick -->
+      <figure class="screen screen-computer">
+        <div class="computer-pick">
+          <span id="computer-emoji" class="computer-emoji" aria-hidden="true">?</span>
+          <span id="computer-move" class="computer-move">Ready</span>
+        </div>
+        <figcaption class="screen-bar">
+          <span class="chip">Computer</span>
+          <span id="computer-status" class="chip chip-outline">Waiting</span>
+        </figcaption>
+      </figure>
     </section>
 
-    <!-- Round result and score (sample numbers for now) -->
+    <!-- Play button and messages -->
+    <section class="controls">
+      <button id="play-button" class="button-primary" type="button" disabled>Play</button>
+      <p id="message" class="message" role="status">Allow camera access to play.</p>
+    </section>
+
+    <!-- Round result and score (filled in by the scoring step) -->
     <section class="results">
-      <article id="result-card" class="card result">
-        <h2 id="verdict" class="result-verdict">You win this round</h2>
-
-        <div class="result-moves">
-          <div class="move">
-            <span class="move-label">You</span>
-            <span id="player-emoji" class="move-emoji" aria-hidden="true">✊</span>
-            <span id="player-move" class="move-name">Rock</span>
-          </div>
-
-          <span id="result-link" class="result-link">beats</span>
-
-          <div class="move">
-            <span class="move-label">Computer</span>
-            <span id="computer-emoji" class="move-emoji" aria-hidden="true">✌️</span>
-            <span id="computer-move" class="move-name">Scissors</span>
-          </div>
-        </div>
+      <article class="card result">
+        <h2 class="card-title">Round result</h2>
+        <p id="verdict" class="result-verdict">Play a round to see who wins.</p>
       </article>
 
       <article class="card score">
-        <h2 class="score-title">Score</h2>
-        <dl class="score-list">
-          <div class="score-item">
-            <dt>Wins</dt>
-            <dd id="score-wins">2</dd>
+        <h2 class="card-title">Score</h2>
+        <dl class="spec">
+          <div class="spec-row">
+            <dt>You</dt>
+            <dd id="score-wins">0</dd>
           </div>
-          <div class="score-item">
-            <dt>Losses</dt>
-            <dd id="score-losses">1</dd>
+          <div class="spec-row">
+            <dt>Computer</dt>
+            <dd id="score-losses">0</dd>
           </div>
-          <div class="score-item">
+          <div class="spec-row">
             <dt>Ties</dt>
             <dd id="score-ties">0</dd>
           </div>
